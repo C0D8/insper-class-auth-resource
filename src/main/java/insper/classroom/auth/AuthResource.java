@@ -5,6 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import insper.classroom.auth.AuthController;
+import insper.classroom.auth.CredentialIn;
+import insper.classroom.auth.LoginOut;
+import insper.classroom.auth.RegisterIn;
+import insper.classroom.auth.SolveIn;
+import insper.classroom.auth.SolveOut;
+
 @RestController
 public class AuthResource implements AuthController {
 
@@ -34,7 +41,6 @@ public class AuthResource implements AuthController {
     public ResponseEntity<LoginOut> authenticate(CredentialIn in) {
         return ResponseEntity.ok(authService.authenticate(in.email(), in.password()));
     }
-
 
     @Override
     public ResponseEntity<SolveOut> solve(SolveIn in) {

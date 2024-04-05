@@ -9,7 +9,6 @@ management:
       exposure:
         include: [ 'prometheus' ]
 
-
 eureka:
   client:
     register-with-eureka: true
@@ -17,7 +16,7 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
 
-classroom:
+store:
   jwt:
     issuer: "In5pEr"
     secretKey: "nPeHcqPFhcHhy9fIEgjYSEWBQaNhVtyYKqo1jR97H23x75qI8Tj33c5AZumnPsoF8QRLjxfC5bgKoK5uHqNmSffMjm2qQXMghW4ju4zrMxAx9Dlpq83HGgo05H8QEuue"

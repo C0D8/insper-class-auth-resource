@@ -1,1 +1,0 @@
-# platform.store.auth-resource

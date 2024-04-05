@@ -18,13 +18,13 @@ import jakarta.annotation.PostConstruct;
 @Service
 public class JwtService {
 
-    @Value("${classroom.jwt.secret-key}")
+    @Value("${store.jwt.secret-key}")
     private String secretKey;
 
-    @Value("${classroom.jwt.issuer}")
+    @Value("${store.jwt.issuer}")
     private String issuer;
 
-    @Value("${classroom.jwt.duration}")
+    @Value("${store.jwt.duration}")
     private long duration = 1l;
 
     private SecretKey key;
@@ -55,6 +55,7 @@ public class JwtService {
         final Claims claims = resolveClaims(token);
         return Token.builder()
             .id(claims.getId())
+            .name(claims.getSubject())
             .role(claims.get("role", String.class))
             .build();
     }

@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import insper.classroom.account.AccountController;
 import insper.classroom.account.AccountIn;
 import insper.classroom.account.AccountOut;
-import insper.classroom.account.AuthIn;
+import insper.classroom.account.LoginIn;
+import insper.classroom.auth.LoginOut;
 
 @Service
 public class AuthService {
@@ -35,9 +36,8 @@ public class AuthService {
         return response.getBody().id();
     }
 
-
     public LoginOut authenticate(String email, String password) {
-        ResponseEntity<AccountOut> response = accountController.auth(AuthIn.builder()
+        ResponseEntity<AccountOut> response = accountController.login(LoginIn.builder()
             .email(email)
             .password(password)
             .build()
@@ -58,6 +58,5 @@ public class AuthService {
     public Token solve(String token) {
         return jwtService.getToken(token);
     }
-
     
 }
