@@ -8,7 +8,7 @@ pipeline{
         }
         stage('Build Interface'){
             steps{
-                build job: 'store.auth', wait: true
+                build job: 'classroom.auth', wait: true
             }
         }
 
