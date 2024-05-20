@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        K8S_PORT = 65132
+        K8S_PORT = 53527
     }
     stages {
         stage('Build Account') {
