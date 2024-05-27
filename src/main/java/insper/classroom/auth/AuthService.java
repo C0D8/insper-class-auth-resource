@@ -10,6 +10,8 @@ import insper.classroom.account.AccountOut;
 import insper.classroom.account.LoginIn;
 import insper.classroom.auth.LoginOut;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @Service
 public class AuthService {
 
@@ -36,6 +38,7 @@ public class AuthService {
         return response.getBody().id();
     }
 
+    @CircuitBreaker(name = "auth", fallbackMethod = "fallbackAuthAuthenticate")
     public LoginOut authenticate(String email, String password) {
         ResponseEntity<AccountOut> response = accountController.login(LoginIn.builder()
             .email(email)
@@ -55,8 +58,17 @@ public class AuthService {
             .build();
     }
 
+    public LoginOut fallbackAuthAuthenticate(String email, String password, Throwable t) {
+        throw new IllegalArgumentException("Invalid credentials");
+    }
+
+    @CircuitBreaker(name = "auth", fallbackMethod = "fallbackAuthSolve")
     public Token solve(String token) {
         return jwtService.getToken(token);
+    }
+
+    public Token fallbackAuthSolve(String token, Throwable t) {
+        throw new IllegalArgumentException("Invalid token");
     }
     
 }
